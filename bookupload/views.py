@@ -15,6 +15,7 @@ def simple_upload(request):
         fs = FileSystemStorage()
         name = fs.save(uploaded_file.name, uploaded_file)
         context['url'] = fs.url(name)
+    
     return render(request, 'bookup/upload.html', context)
 
 
@@ -38,6 +39,7 @@ def upload_book(request):
         context = {
             'form': form
         }
+    
     return render(request, 'bookup/upload_book.html', context)
 
 

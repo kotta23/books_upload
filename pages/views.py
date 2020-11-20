@@ -14,6 +14,7 @@ def home(request):
         'current_user' : current_user.id
 
     }
+
     return render(request, 'pages/home.html', context)
 
 
@@ -25,6 +26,8 @@ def signup(request):
             return redirect('home')
     else:
         form = UserCreationForm()
+        
+
     return render(request, 'registration/signup.html', {
         'form': form
     })
