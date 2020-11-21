@@ -12,11 +12,9 @@ def home(request):
     context = {
         'count': count,
         'current_user' : current_user.id
-
     }
-
+#    print(context)
     return render(request, 'pages/home.html', context)
-
 
 def signup(request):
     if request.method == 'POST':
@@ -25,18 +23,15 @@ def signup(request):
             form.save()
             return redirect('home')
     else:
-        form = UserCreationForm()
-        
-
-    return render(request, 'registration/signup.html', {
+        form = UserCreationForm()    
+    context = {
         'form': form
-    })
-
+    }
+    return render(request, 'registration/signup.html', context)
 
 @login_required
 def secret_page(request):
     return render(request, 'secret_page.html')
-
 
 class SecretPage(LoginRequiredMixin, TemplateView):
     template_name = 'secret_page.html'

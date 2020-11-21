@@ -12,19 +12,20 @@ def simple_upload(request):
     context = {}
     if request.method == 'POST':
         uploaded_file = request.FILES['document']
+#        print(uploaded_file)
         fs = FileSystemStorage()
         name = fs.save(uploaded_file.name, uploaded_file)
         context['url'] = fs.url(name)
-    
+#    print(context)
     return render(request, 'bookup/upload.html', context)
 
 
 def book_list(request):
     books = Book.objects.all()
-
     context = {
         'books': books
     }
+#    print(context)
     return render(request, 'bookup/book_list.html', context)
 
 
@@ -36,14 +37,14 @@ def upload_book(request):
             return redirect('book_list')
     else:
         form = BookForm()
-        context = {
-            'form': form
-        }
-    
+    context = {
+        'form': form
+    }    
     return render(request, 'bookup/upload_book.html', context)
 
 
 def delete_book(request, pk):
+#    print(pk)
     if request.method == 'POST':
         book = Book.objects.get(pk=pk)
         book.delete()
